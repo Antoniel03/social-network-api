@@ -5,7 +5,12 @@ import (
 	"strconv"
 )
 
+// TODO improve this code
 func GetString(key, fallback string) string {
+	val := os.Getenv(key)
+	if val != "" {
+		return val
+	}
 	val, ok := os.LookupEnv(key)
 	if !ok {
 		return fallback

@@ -9,14 +9,14 @@ import (
 	"github.com/Antoniel03/social-network-api/internal/db"
 	"github.com/Antoniel03/social-network-api/internal/storage"
 	"github.com/Antoniel03/social-network-api/service"
-	"github.com/joho/godotenv"
+	// "github.com/joho/godotenv"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Fatal("Error loading .env file")
+	// }
 
 	router := http.NewServeMux()
 	dbConnection := db.SetupDB()
