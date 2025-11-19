@@ -31,10 +31,15 @@ func runMigrations(db *sql.DB) {
 
 func SetupDB() *sql.DB {
 	user := env.GetString("DATABASE_USER", "postgres")
+	host := env.GetString("DATABASE_HOST", "localhost")
 	db_name := env.GetString("DATABASE_NAME", "mydb")
+	sslmode := env.GetString("SSLMODE", "disable")
+	password := env.GetString("DATABASE_PASSWORD", "")
+
 	log.Printf("%s, %s", user, db_name)
 
-	connStr := "user=" + user + " dbname=" + db_name + " sslmode=disable"
+	connStr := "host=" + host + " password=" + password + " user=" + user + " dbname=" + db_name + " sslmode=" + sslmode
+	log.Println(connStr)
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatalf("Error connecting to the database: %v", err)

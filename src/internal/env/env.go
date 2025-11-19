@@ -10,6 +10,8 @@ func GetString(key, fallback string) string {
 	val := os.Getenv(key)
 	if val != "" {
 		return val
+	} else if val == "" {
+		return fallback
 	}
 	val, ok := os.LookupEnv(key)
 	if !ok {
