@@ -24,7 +24,7 @@ func runMigrations(db *sql.DB) {
 	if err != nil {
 		log.Fatalf("Error while getting migration instance: %v", err)
 	}
-	if err := m.Up(); err != nil && err != migrate.ErrNoChange {
+	if err := m.Migrate(1); err != nil && err != migrate.ErrNoChange {
 		log.Fatal(err)
 	}
 }
