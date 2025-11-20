@@ -46,7 +46,7 @@ func SetupRouter(router *http.ServeMux, a *handler.Handler) {
 
 	})
 	router.HandleFunc("POST /login", a.Login)
-	router.Handle("POST /users", verifyAuth(a.CreateUser))
+	router.HandleFunc("POST /users", a.CreateUser)
 	router.Handle("GET /users/{id}", verifyAuth(a.GetUser))
 	router.Handle("DELETE /users/{id}", verifyAuth(a.Delete))
 	router.Handle("PATCH /users/{id}/name", verifyAuth(a.UpdateName))

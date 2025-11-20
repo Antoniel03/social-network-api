@@ -31,14 +31,17 @@ func runMigrations(db *sql.DB) {
 
 func SetupDB() *sql.DB {
 	user := env.GetString("DATABASE_USER", "postgres")
-	host := env.GetString("DATABASE_HOST", "localhost")
+	host := env.GetString("DATABASE_HOST", "")
 	db_name := env.GetString("DATABASE_NAME", "mydb")
 	sslmode := env.GetString("SSLMODE", "disable")
 	password := env.GetString("DATABASE_PASSWORD", "")
 
 	log.Printf("%s, %s", user, db_name)
 
-	connStr := "host=" + host + " password=" + password + " user=" + user + " dbname=" + db_name + " sslmode=" + sslmode
+	connStr := "user=" + user + " dbname=" + db_name + " sslmode=" + sslmode
+	if host != "" && password != "" {
+		connStr = connStr + " host=" + host + " password=" + password
+	}
 	log.Println(connStr)
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
